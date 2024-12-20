@@ -8,7 +8,6 @@ const AppRoutes = () => {
       <Routes>
         {/* Ruta para Login */}
         <Route path="/login" element={<Login />} />
-
         {/* Redireccionar a login por defecto */}
         <Route path="*" element={<Navigate to="/login" replace />} />
       </Routes>
