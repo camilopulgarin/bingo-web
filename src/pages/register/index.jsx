@@ -11,7 +11,7 @@ const Register = () => {
   };
 // register
   return (
-    <Container  maxWidth="sm" sx={{ display: 'flex', alignItems: 'center', minHeight: '100vh' }}>
+    <Container  maxWidth="sm" sx={{ display: 'flex', alignItems: 'center', minHeight: '100vh' }} >
       <Paper elevation={3} sx={{ width: '100%', p: 4 }}>
         <Box >
           <RegisterHeader />
