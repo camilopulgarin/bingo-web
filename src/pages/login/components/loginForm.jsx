@@ -1,4 +1,3 @@
-import React from 'react';
 import { useForm, Controller } from 'react-hook-form';
 import { TextField, Button, Box, Typography } from '@mui/material';
 
@@ -10,13 +9,13 @@ const LoginForm = ({ onSubmit }) => {
   } = useForm();
 
   return (
-    <Box component="form" onSubmit={handleSubmit(onSubmit)} noValidate>
+    < Box component="form" onSubmit={handleSubmit(onSubmit)} noValidate >
       <Controller
         name="email"
         control={control}
         defaultValue=""
         rules={{ required: 'El correo electrónico es requerido' }}
-        render={({ field }) => (
+        render={ ({ field }) => (
           <TextField
             {...field}
             label="Correo Electrónico"
