@@ -10,13 +10,13 @@ const LoginForm = ({ onSubmit }) => {
   } = useForm();
 
   return (
-    <Box component="form" onSubmit={handleSubmit(onSubmit)} noValidate>
+    < Box component="form" onSubmit={handleSubmit(onSubmit)} noValidate >
       <Controller
         name="email"
         control={control}
         defaultValue=""
         rules={{ required: 'El correo electrónico es requerido' }}
-        render={({ field }) => (
+        render={ ({ field }) => (
           <TextField
             {...field}
             label="Correo Electrónico"

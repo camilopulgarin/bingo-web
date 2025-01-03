@@ -1,19 +1,35 @@
 import React from 'react';
 import { useForm, Controller } from 'react-hook-form';
 import { TextField, Button, Box, Typography } from '@mui/material';
+import * as Yup from 'yup';
+import { yupResolver } from '@hookform/resolvers/yup';
+
+const schema = Yup.object().shape({
+  user: Yup.string().required('El nombre de usuario es requerido'),
+  email: Yup.string().email('El correo electrónico debe ser válido').required('El correo electrónico es requerido'),
+  password: Yup.string()
+    .min(8, 'La contraseña debe tener al menos 8 caracteres')
+    .required('La contraseña es requerida'),
+  confirmPassword: Yup.string()
+    .oneOf([Yup.ref('password'), null], 'Las contraseñas no coinciden')
+    .required('La confirmación de la contraseña es requerida'),
+  terms: Yup.bool().oneOf([true], 'Debes aceptar los términos y condiciones').required('Debes aceptar los términos y condiciones'),
+});
 const RegisterForm = ({ onSubmit }) => {
   const {
     handleSubmit,
     control,
     formState: { errors },
-  } = useForm();
+  } = useForm({
+    resolver: yupResolver(schema)
+  });
   return (
-    <Box component="form" onSubmit={handleSubmit(onSubmit)} noValidate>
-          <Controller
-        name="userName"
+    < Box component="form" onSubmit={handleSubmit(onSubmit)} noValidate >
+      <Controller
+        name="user"
         control={control}
         defaultValue=""
-        rules={{ required: 'El nombre de usuario es requerido' }}
+        
         render={({ field }) => (
           <TextField
             {...field}
@@ -21,8 +37,8 @@ const RegisterForm = ({ onSubmit }) => {
             variant="outlined"
             fullWidth
             margin="normal"
-            error={!!errors.email}
-            helperText={errors.email?.message}
+            error={!!errors.user}
+            helperText={errors.user?.message}
           />
         )}
       />
@@ -61,7 +77,30 @@ const RegisterForm = ({ onSubmit }) => {
           />
         )}
       />
-      <Button
+      <Controller
+        name="confirmPassword"
+        control={control}
+        defaultValue=""
+        rules={{ required: 'La contraseña es requerida' }}
+        render={({ field }) => (
+          <TextField
+            {...field}
+            label="Confirmar contraseña"
+            type="password"
+            variant="outlined"
+            fullWidth
+            margin="normal"
+            error={!!errors.confirmPassword}
+            helperText={errors.confirmPassword?.message}
+          />
+        )}
+      />
+      
+     <Box textAlign="center" >
+        <a>Acepto terminos y condiciones</a>
+        <input type="checkbox" />
+     </Box>
+     <Button
         type="submit"
         fullWidth
         variant="contained"
@@ -70,11 +109,7 @@ const RegisterForm = ({ onSubmit }) => {
       >
         Registrarse
       </Button>
-     <Box textAlign="center" >
-        <a>Acepto terminos y condiciones</a>
-        <input type="checkbox" />
-     </Box>
-    </Box>
+  </Box>
   );
 };
 export default RegisterForm;
