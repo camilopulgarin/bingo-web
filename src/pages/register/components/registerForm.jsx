@@ -1,4 +1,6 @@
 import { useForm, Controller } from 'react-hook-form';
+import { TextField, Button, Box, Typography, FormControlLabel, Checkbox } from '@mui/material';
+import * as Yup from 'yup';
 import { TextField, Button, Box } from '@mui/material';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { regiterSchema } from '../validations';
@@ -86,12 +88,25 @@ const RegisterForm = ({ onSubmit }) => {
           />
         )}
       />
-      
-     <Box textAlign="center" >
-        <a>Acepto terminos y condiciones</a>
-        <input type="checkbox" />
-     </Box>
-     <Button
+     <Controller
+        name="terms"
+        control={control}
+        defaultValue={false}
+        render={({ field }) => (
+          <Box textAlign="center" marginTop={2}>
+            <FormControlLabel
+              control={<Checkbox {...field} checked={field.value} />}
+              label="Acepto términos y condiciones"
+            />
+            {errors.terms && (
+              <Typography color="error" variant="body2">
+                {errors.terms.message}
+              </Typography>
+            )}
+          </Box>
+        )}
+      />
+      <Button
         type="submit"
         fullWidth
         variant="contained"
@@ -99,7 +114,7 @@ const RegisterForm = ({ onSubmit }) => {
         sx={{ mt: 3, mb: 2 }}
       >
         Registrarse
-      </Button>
+      </Button>   
   </Box>
   );
 };
