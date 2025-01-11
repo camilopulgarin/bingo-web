@@ -1,28 +1,19 @@
-import React from 'react';
 import { useForm, Controller } from 'react-hook-form';
-import { TextField, Button, Box, Typography } from '@mui/material';
-import * as Yup from 'yup';
+import { TextField, Button, Box } from '@mui/material';
 import { yupResolver } from '@hookform/resolvers/yup';
+import { regiterSchema } from '../validations';
 
-const schema = Yup.object().shape({
-  user: Yup.string().required('El nombre de usuario es requerido'),
-  email: Yup.string().email('El correo electrónico debe ser válido').required('El correo electrónico es requerido'),
-  password: Yup.string()
-    .min(8, 'La contraseña debe tener al menos 8 caracteres')
-    .required('La contraseña es requerida'),
-  confirmPassword: Yup.string()
-    .oneOf([Yup.ref('password'), null], 'Las contraseñas no coinciden')
-    .required('La confirmación de la contraseña es requerida'),
-  terms: Yup.bool().oneOf([true], 'Debes aceptar los términos y condiciones').required('Debes aceptar los términos y condiciones'),
-});
+
 const RegisterForm = ({ onSubmit }) => {
   const {
     handleSubmit,
     control,
     formState: { errors },
   } = useForm({
-    resolver: yupResolver(schema)
+    resolver: yupResolver(regiterSchema)
   });
+
+  console.log("errors: ", errors)
   return (
     < Box component="form" onSubmit={handleSubmit(onSubmit)} noValidate >
       <Controller
