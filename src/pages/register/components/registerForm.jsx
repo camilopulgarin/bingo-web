@@ -1,7 +1,6 @@
 import { useForm, Controller } from 'react-hook-form';
 import { TextField, Button, Box, Typography, FormControlLabel, Checkbox } from '@mui/material';
 import * as Yup from 'yup';
-import { TextField, Button, Box } from '@mui/material';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { regiterSchema } from '../validations';
 
