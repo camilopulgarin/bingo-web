@@ -3,6 +3,7 @@ import { TextField, Button, Box, Typography, FormControlLabel, Checkbox } from '
 import * as Yup from 'yup';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { regiterSchema } from '../validations';
+import { Link } from 'react-router-dom';
 
 
 const RegisterForm = ({ onSubmit }) => {
@@ -28,6 +29,20 @@ const RegisterForm = ({ onSubmit }) => {
             label="Nombre de usuario"
             variant="outlined"
             fullWidth
+            sx={{
+              input: {
+                color: '#111'
+              },
+              fieldset: {
+                borderColor: '#333' 
+              },
+              '& .MuiInputLabel-root': {
+                color: '#111' 
+              },
+              '& .MuiInputLabel-root.Mui-focused': {
+                color: '#1976d2' 
+              }
+            }}
             margin="normal"
             error={!!errors.user}
             helperText={errors.user?.message}
@@ -46,6 +61,20 @@ const RegisterForm = ({ onSubmit }) => {
             variant="outlined"
             fullWidth
             margin="normal"
+            sx={{
+              input: {
+                color: '#111'
+              },
+              fieldset: {
+                borderColor: '#333' 
+              },
+              '& .MuiInputLabel-root': {
+                color: '#111' 
+              },
+              '& .MuiInputLabel-root.Mui-focused': {
+                color: '#1976d2' 
+              }
+            }}
             error={!!errors.email}
             helperText={errors.email?.message}
           />
@@ -63,6 +92,20 @@ const RegisterForm = ({ onSubmit }) => {
             type="password"
             variant="outlined"
             fullWidth
+            sx={{
+              input: {
+                color: '#111'
+              },
+              fieldset: {
+                borderColor: '#333' 
+              },
+              '& .MuiInputLabel-root': {
+                color: '#111' 
+              },
+              '& .MuiInputLabel-root.Mui-focused': {
+                color: '#1976d2' 
+              }
+            }}
             margin="normal"
             error={!!errors.password}
             helperText={errors.password?.message}
@@ -81,6 +124,20 @@ const RegisterForm = ({ onSubmit }) => {
             type="password"
             variant="outlined"
             fullWidth
+            sx={{
+              input: {
+                color: '#111'
+              },
+              fieldset: {
+                borderColor: '#333' 
+              },
+              '& .MuiInputLabel-root': {
+                color: '#111' 
+              },
+              '& .MuiInputLabel-root.Mui-focused': {
+                color: '#1976d2' 
+              }
+            }}
             margin="normal"
             error={!!errors.confirmPassword}
             helperText={errors.confirmPassword?.message}
@@ -95,7 +152,9 @@ const RegisterForm = ({ onSubmit }) => {
           <Box textAlign="center" marginTop={2}>
             <FormControlLabel
               control={<Checkbox {...field} checked={field.value} />}
-              label="Acepto términos y condiciones"
+              label={<Link to="../terms-and-conditions" target="blank" style={{ textDecoration: 'none' }}>
+              Términos y condiciones
+            </Link>}
             />
             {errors.terms && (
               <Typography color="error" variant="body2">
