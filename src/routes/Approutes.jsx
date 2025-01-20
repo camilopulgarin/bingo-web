@@ -1,7 +1,6 @@
 import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
 import Login from '../pages/login';
-import Register from '../pages/register';
-import TermsAndConditions from '../pages/TermsAndConditions/TermsAndConditions';
+import Register from '../pages/register'; 
 
 const AppRoutes = () => {
   //comentario
@@ -14,8 +13,7 @@ const AppRoutes = () => {
         <Route path="*" element={<Navigate to="/login" replace />} /> 
         <Route path="/register" element={<Register />} />
         {/* Redireccionar a login por defecto */}
-        <Route path="*" element={<Navigate to="/register" replace />} /> 
-        <Route path="/terms-and-conditions" element={<TermsAndConditions />} />
+        <Route path="*" element={<Navigate to="/register" replace />} />
         
       </Routes>
     </Router>
