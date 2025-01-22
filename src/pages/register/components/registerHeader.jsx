@@ -13,7 +13,7 @@ const RegisterHeader = ({ name="Registro", logoSrc= "/logoBingoWeb.png"}) => {
             {name}
           </Typography>      
           <Typography variant="subtitle1">
-            Por favor, ingresa tus datos para registrarte.
+            Por favor, ingresa tus datos para crear una nueva cuenta.
           </Typography>           
         </Box>  
         
