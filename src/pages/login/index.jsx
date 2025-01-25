@@ -1,10 +1,27 @@
 import { Container, Box, Paper } from '@mui/material';
 import LoginHeader from './components/LoginHeader';
 import LoginForm from './components/LoginForm';
+import { loginUser } from '../../redux/slices/authSlice';
+import { useDispatch } from 'react-redux';
+import { toast, ToastContainer } from 'react-toastify';
+import { useNavigate } from 'react-router-dom';
 
 const Login = () => {
-  const handleLogin = (data) => {
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+
+  const handleLogin = async (data) => {
     console.log('Datos enviados:', data);
+    try {
+      await dispatch(loginUser(data));
+      navigate('/dashboard');
+      toast.success('Inicio de sesión exitoso');
+    } catch (error) {
+      toast.error('Error al iniciar sesión');
+    }
+    
+
+
     // Aquí puedes llamar a tu API o manejar la lógica de autenticación
   };
   // comentario de test
@@ -16,6 +33,7 @@ const Login = () => {
           <LoginForm onSubmit={handleLogin} />
         </Box>
       </Paper>
+      <ToastContainer />
     </Container>
   );
 };
