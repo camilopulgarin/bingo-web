@@ -14,6 +14,8 @@ import DialogTitle from '@mui/material/DialogTitle';
 import TermsAndConditions from './termsAndConditions';
 import PrivacyPolicy from './privacyPolicy';
 
+import UseModal from '../useModal';
+
 const RegisterForm = ({ onSubmit }) => {
   const {
     handleSubmit,
@@ -25,14 +27,8 @@ const RegisterForm = ({ onSubmit }) => {
 
   console.log("errors: ", errors)
 
-  const [openTermsModal, setOpenTermsModal] = useState(false);
-  const [openPrivacyModal, setOpenPrivacyModal] = useState(false);
-
-  const handleOpenTermsModal = () => setOpenTermsModal(true);
-  const handleCloseTermsModal = () => setOpenTermsModal(false);
-
-  const handleOpenPrivacyModal = () => setOpenPrivacyModal(true);
-  const handleClosePrivacyModal = () => setOpenPrivacyModal(false);
+  const { isOpen: openTermsModal, openModal: handleOpenTermsModal, closeModal: handleCloseTermsModal } = UseModal();
+  const { isOpen: openPrivacyModal, openModal: handleOpenPrivacyModal, closeModal: handleClosePrivacyModal } = UseModal();
 
   return (
     < Box component="form" onSubmit={handleSubmit(onSubmit)} noValidate >

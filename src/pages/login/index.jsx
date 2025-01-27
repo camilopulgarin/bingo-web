@@ -27,7 +27,7 @@ const Login = () => {
   // comentario de test
   return (
     <Container maxWidth="sm" sx={{ display: 'flex', alignItems: 'center', minHeight: '100vh', justifyContent: "center" }}>
-      <Paper elevation={3} sx={{ width: '100%', p: 4, boxShadow: '0px 0px 20px 2px #000',  backgroundColor: '#eee' , color: '#111' }}>
+      <Paper elevation={3} sx={{ width: '100%', p: 4, boxShadow: '0px 0px 20px 2px #000',  background: '#fff0'  , color: '#111' }}>
         <Box>
           <LoginHeader />
           <LoginForm onSubmit={handleLogin} />
