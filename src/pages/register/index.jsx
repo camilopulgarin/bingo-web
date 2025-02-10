@@ -1,9 +1,8 @@
 import { Container, Box, Paper } from '@mui/material';
 import RegisterHeader from './components/registerHeader';
 import RegisterForm from './components/registerForm';
-import axios from 'axios';
+import { register } from '../../api/authApi';
 
-const urlAPI = 'http://localhost:3000/api/v1';
 
 const Register = () => {
   const handleRegister = async (data) => {
@@ -11,10 +10,11 @@ const Register = () => {
 
     try {
       // Realizar la petición POST a la API
-      const response = await axios.post(`${urlAPI}/users`, {
-        name: data.user,
-        email: data.email,
-        password: data.password
+
+        const response = await register({
+          user: data.user,
+          email: data.email,
+          password: data.password
       });
 
       console.log('Respuesta de la API:', response.data);

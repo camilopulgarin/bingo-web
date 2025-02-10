@@ -10,3 +10,12 @@ export const getUserProfile = async () => {
   const response = await axiosInstance.get("/auth/me");
   return response.data;
 };
+
+export const register = async (userData) => {
+  const response = await axiosInstance.post("/users", {
+    name: userData.user,
+    email: userData.email,
+    password: userData.password,
+  });
+  return response.data;
+};
