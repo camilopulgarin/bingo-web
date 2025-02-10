@@ -15,25 +15,27 @@ const PrivacyPolicy = () => {
       </Typography>
       <Typography variant="body1" paragraph>
         Recopilamos la siguiente información cuando te registras o utilizas nuestros servicios:
+      </Typography>  
         <ul>
           <li>Información personal: como tu nombre, dirección de correo electrónico, fecha de nacimiento y otra información de contacto.</li>
           <li>Información de pago: si realizas depósitos o retiros, podemos recopilar detalles de pago y transacciones.</li>
           <li>Información técnica: como tu dirección IP, navegador web y otros datos relacionados con tu interacción con nuestro sitio.</li>
         </ul>
-      </Typography>
+      
 
       <Typography variant="h6" paragraph>
         2. Uso de la Información
       </Typography>
       <Typography variant="body1" paragraph>
         Utilizamos la información recopilada para los siguientes fines:
+      </Typography>
         <ul>
           <li>Para proporcionarte acceso a nuestros servicios y permitirte participar en los juegos.</li>
           <li>Para procesar transacciones y pagos.</li>
           <li>Para personalizar tu experiencia en nuestro sitio y ofrecerte promociones o servicios relevantes.</li>
           <li>Para cumplir con requisitos legales y regulaciones.</li>
         </ul>
-      </Typography>
+      
 
       <Typography variant="h6" paragraph>
         3. Protección de la Información
@@ -47,13 +49,14 @@ const PrivacyPolicy = () => {
       </Typography>
       <Typography variant="body1" paragraph>
         No compartimos tu información personal con terceros, excepto en los siguientes casos:
+      </Typography>
+      
         <ul>
           <li>Cuando sea necesario para cumplir con la ley o responder a procedimientos legales.</li>
           <li>Para procesadores de pagos o proveedores de servicios que nos ayuden a gestionar transacciones.</li>
           <li>En el caso de que se venda o transfiera nuestra empresa a otro propietario.</li>
         </ul>
-      </Typography>
-
+      
       <Typography variant="h6" paragraph>
         5. Cookies y Tecnologías Similares
       </Typography>
@@ -87,11 +90,12 @@ const PrivacyPolicy = () => {
       </Typography>
       <Typography variant="body1" paragraph>
         Si tienes alguna pregunta sobre esta Política de Privacidad o deseas ejercer tus derechos, puedes contactarnos a través de:
+        </Typography>
         <ul>
           <li>Correo electrónico: contacto@bingo-web.com</li>
           <li>Teléfono: +123 456 7890</li>
         </ul>
-      </Typography>
+      
     </Box>
     )
 }

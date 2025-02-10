@@ -3,6 +3,7 @@ import Login from '../pages/login';
 import Register from '../pages/register';
 import ProtectedRoute from '../components/ProtectedRoute'; // Importa el componente ProtectedRoute
 import Dashboard from '../pages/dashboard';
+import Home from '../pages/home/home';
 
 const AppRoutes = () => {
   return (
@@ -20,6 +21,7 @@ const AppRoutes = () => {
         <Route path="/dashboard" element={<ProtectedRoute element={<Dashboard />} />} />
         <Route path="/profile" element={<ProtectedRoute element={<h1>Perfil</h1>} />} />
         <Route path="/settings" element={<ProtectedRoute element={<h1>Configuraciones</h1>} />} />
+        <Route path="/" element={<Home />}/>
         
         {/* Redireccionar a login por defecto */}
         <Route path="*" element={<Navigate to="/register" replace />} />
