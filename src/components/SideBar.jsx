@@ -1,14 +1,16 @@
-import { useSelector } from 'react-redux';
 import { NavLink } from 'react-router-dom';
 import { Drawer, List, ListItem, ListItemIcon, ListItemText, IconButton } from '@mui/material';
-import { Home, Settings, Person, Menu } from '@mui/icons-material';
+import { Home, Settings, Person, Menu, PlusOne, Logout } from '@mui/icons-material';
 import { useState } from 'react';
 import useMediaQuery from '@mui/material/useMediaQuery';
+import LogoutButton from './LogoutButton';
 
 const menuItems = [
   { label: 'Inicio', icon: <Home />, path: '/dashboard', roles: ['admin', 'user'] },
   { label: 'Configuración', icon: <Settings />, path: '/settings', roles: ['admin'] },
-  { label: 'Perfil', icon: <Person />, path: '/profile', roles: ['admin', 'user', 'guest'] }
+  { label: 'Perfil', icon: <Person />, path: '/profile', roles: ['admin', 'user', 'guest'] },
+  { label: 'Crear Sala', icon: <PlusOne />, path: '/profile', roles: ['admin', 'user', 'guest'] },
+  { label: 'Mis Juegos', icon: <PlusOne />, path: '/profile', roles: ['admin', 'user', 'guest'] }
 ];
 
 const Sidebar = ({ open, setOpen }) => {
@@ -36,6 +38,10 @@ const Sidebar = ({ open, setOpen }) => {
               <ListItemText sx={{ color: "gray" }} primary={label} />
             </ListItem>
           ))}
+          <ListItem>
+          <ListItemIcon sx={{ color: "gray" }}><Logout /></ListItemIcon>
+            <LogoutButton />
+          </ListItem>
         </List>
       </Drawer>
     );
