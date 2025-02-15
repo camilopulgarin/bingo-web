@@ -10,7 +10,7 @@ const menuItems = [
   { label: 'Configuración', icon: <Settings />, path: '/settings', roles: ['admin'] },
   { label: 'Perfil', icon: <Person />, path: '/profile', roles: ['admin', 'user', 'guest'] },
   { label: 'Crear Sala', icon: <PlusOne />, path: '/profile', roles: ['admin', 'user', 'guest'] },
-  { label: 'Mis Juegos', icon: <PlusOne />, path: '/profile', roles: ['admin', 'user', 'guest'] }
+  { label: 'Mis Partidas', icon: <PlusOne />, path: '/game-history', roles: ['admin', 'user', 'guest'] }
 ];
 
 const Sidebar = ({ open, setOpen }) => {
