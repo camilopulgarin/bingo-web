@@ -5,8 +5,8 @@ import { Navigate } from "react-router-dom";
 
 const AuthGuard = ({ children }) => {
   const { isAuthenticated } = useSelector((state) => state.auth);
-  console.log(isAuthenticated);
-  if (!isAuthenticated) {
+
+  if (!localStorage.getItem("jwtToken")) {
     return <Navigate to="/login" />;
   }
 

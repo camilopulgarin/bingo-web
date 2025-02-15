@@ -3,8 +3,8 @@ import { useSelector } from 'react-redux';
 import { Card, CardContent, Typography } from '@mui/material';
 
 const mockStats = [
-  { title: "Juegos Jugados", value: 120 },
-  { title: "Juegos Ganados", value: 45 },
+  { title: "Partidas Jugadas", value: 120 },
+  { title: "Partidas Ganadas", value: 45 },
   { title: "Cartones Vendidos", value: 350 },
 ];
 
