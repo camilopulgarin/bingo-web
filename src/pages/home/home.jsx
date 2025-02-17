@@ -2,8 +2,19 @@ import React from 'react';
 import { Container, Typography, Button, Box, Grid } from '@mui/material';
 import Header from './components/header';
 import Footer from './components/footer';
+import GameRoomModal from './components/gameRoomModal';
+import Dialog from '@mui/material/Dialog';
+import DialogActions from '@mui/material/DialogActions';
+import DialogContent from '@mui/material/DialogContent';
+
+
+import UseModal from '../register/useModal';
 
 const Home = () => {
+
+  const { isOpen: openRoomModal, openModal: handleOpenRoomModal, closeModal: handleCloseRoomModal } = UseModal();
+  
+
   return (
     <div
       style={{
@@ -18,6 +29,8 @@ const Home = () => {
         backgroundColor: 'rgba(0, 0, 0, 0.5)', // Adds a semi-transparent overlay on top of the image for readability
       }}
     >
+    
+
       <Header />
       
       <Container maxWidth="lg" sx={{ flexGrow: 1 }}>
@@ -39,10 +52,26 @@ const Home = () => {
                 Jugar Ahora
               </Button>
             </Grid>
-            <Grid item>
-              <Button variant="outlined" color="secondary" size="large">
-                Ver Partidas
+            <Grid item >
+              <Button onClick={handleOpenRoomModal} variant="outlined" color="secondary" size="large">
+                Sala privada
               </Button>
+              
+              <Dialog  open={openRoomModal} onClose={handleCloseRoomModal}
+              sx={{ 
+                '& .MuiDialog-paper': { background:'Linear-gradient(#7bf , #eee)', color: 'white', borderRadius: '20px' } 
+              }}>
+              
+              <DialogContent >
+                <GameRoomModal  />
+              </DialogContent>
+              <DialogActions>
+                <Button onClick={handleCloseRoomModal} color="primary">
+                  Cerrar 
+                </Button>
+              </DialogActions>
+            </Dialog>
+
             </Grid>
           </Grid>
         </Box>
