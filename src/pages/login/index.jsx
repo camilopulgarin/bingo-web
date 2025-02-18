@@ -13,16 +13,17 @@ const Login = () => {
   const handleLogin = async (data) => {
     console.log('Datos enviados:', data);
     try {
-      await dispatch(loginUser(data));
-      navigate('/dashboard');
-      toast.success('Inicio de sesión exitoso');
+      const result = await dispatch(loginUser(data));
+  
+      if (loginUser.fulfilled.match(result)) {
+        toast.success('Inicio de sesión exitoso');
+        navigate('/dashboard');
+      } else {
+        toast.error(result.payload.message)
+      }
     } catch (error) {
-      toast.error('Error al iniciar sesión');
+      toast.error(typeof error.message === 'string' ? error.message : JSON.stringify(error.message));
     }
-    
-
-
-    // Aquí puedes llamar a tu API o manejar la lógica de autenticación
   };
   // comentario de test
   return (
