@@ -62,9 +62,9 @@ const GameHistory = () => {
       <DynamicTable columns={[
         { field: "name", headerName: "Nombre de la Partida" },
         { field: "status", headerName: "Estado" },
-        { field: "capacity", headerName: "Número de Participantes" },
-        { field: "created_at", headerName: "Fecha de Creación" }
-      ]} data={formattedGames} actions={[]} />
+        { field: "capacity", headerName: "Número de Participantes"},
+        { field: "created_at", headerName: "Fecha de Creación",  renderCell: (row) => formatDate(row.created_at)  }
+      ]} data={games} actions={[]} />
 
       {/* Botones de paginación */}
       <div className="flex justify-between mt-4">

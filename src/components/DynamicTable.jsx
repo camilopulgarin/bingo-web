@@ -20,7 +20,7 @@ const DynamicTable = ({ columns, data, actions }) => {
           {data.map((row, rowIndex) => (
             <TableRow key={rowIndex} className="hover:bg-gray-50">
               {columns.map((col) => (
-                <TableCell key={col.field}>{row[col.field]}</TableCell>
+                <TableCell key={col.field}>{col.renderCell ? col.renderCell(row) : row[col.field]}</TableCell>
               ))}
               {actions && actions.length > 0 && (
                 <TableCell>
