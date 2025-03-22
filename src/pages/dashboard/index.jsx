@@ -1,6 +1,7 @@
-import { motion } from 'framer-motion';
+import { animate, motion, useAnimation, useMotionValue, useTransform } from 'framer-motion';
 import { useSelector } from 'react-redux';
 import { Card, CardContent, Typography } from '@mui/material';
+import { Fragment, useEffect } from 'react';
 
 const mockStats = [
   { title: "Partidas Jugadas", value: 120 },
@@ -18,35 +19,51 @@ const Dashboard = () => {
   const stats = useSelector((state) => state.game?.stats) || mockStats;
 
   return (
-    <motion.div
-      initial={{ opacity: 0, y: -20 }}
-      animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.5 }}
-      className="grid grid-cols-1 md:grid-cols-3 gap-4 p-4"
-    >
-      {stats.map((stat, index) => (
-        <motion.div
-          key={index}
-          initial={{ opacity: 0, scale: 0.8 }}
-          animate={{ opacity: 1, scale: 1 }}
-          transition={{ duration: 0.5, delay: index * 0.1 }}
-        >
-          <StatCard title={stat.title} value={stat.value} />
-        </motion.div>
-      ))}
-      <Ranking />
-      <BingoAnimation />
-    </motion.div>
+    <Fragment className="flex flex-col items-center justify-center">
+            <BingoAnimation />
+            <motion.div
+              initial={{ opacity: 0, y: -20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5 }}
+              className="grid grid-cols-1 md:grid-cols-2 gap-4 p-4"
+            >
+              {stats.map((stat, index) => (
+                <motion.div
+                  key={index}
+                  initial={{ opacity: 0, scale: 0.8 }}
+                  animate={{ opacity: 1, scale: 1 }}
+                  transition={{ duration: 0.5, delay: index * 0.1 }}
+                >
+                  <StatCard title={stat.title} value={stat.value} />
+                </motion.div>
+              ))}
+              <Ranking />
+            </motion.div>
+    </Fragment>
   );
 };
 
 const StatCard = ({ title, value }) => {
+  const controls = useAnimation();
+  const count = useMotionValue(0)
+    const rounded = useTransform(() => Math.round(count.get()))
+
+  useEffect(() => {
+    const controls = animate(count, value, { duration: 1 })
+    return () => controls.stop()
+}, [])
+
   return (
     <Card sx={{ boxShadow: 3, borderRadius: 2, padding: 2 }}>
       <CardContent>
         <Typography variant="h6">{title}</Typography>
         <Typography variant="h4" color="primary">
-          {value}
+          <motion.span 
+            initial={{ value: 0 }}
+            animate={controls}
+          >
+            {rounded}
+          </motion.span>
         </Typography>
       </CardContent>
     </Card>
@@ -55,7 +72,7 @@ const StatCard = ({ title, value }) => {
 
 const Ranking = () => {
   return (
-    <Card sx={{ boxShadow: 3, borderRadius: 2, padding: 2, marginTop: 4 }}>
+    <Card sx={{ boxShadow: 3, borderRadius: 2, padding: 2 }}>
       <CardContent>
         <Typography variant="h6">Ranking de Jugadores</Typography>
         {mockRanking.map((player, index) => (
@@ -85,7 +102,7 @@ const BingoAnimation = () => {
 
   return (
     <motion.div
-      className="flex justify-center mt-6 relative h-32"
+      className="flex justify-center mt-6 relative h-32 items-center w-full gap-4"
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       transition={{ duration: 0.8 }}
@@ -93,9 +110,9 @@ const BingoAnimation = () => {
       {balls.map((ball, index) => (
         <motion.div
           key={index}
-          className={`w-16 h-16 rounded-full absolute flex items-center justify-center text-white font-bold text-xl ${ball.color} shadow-lg`}
-          animate={{ y: [0, -20, 0], x: [0, 10, -10, 0], rotate: [0, 360] }}
-          transition={{ duration: 2, repeat: Infinity, delay: index * 0.3 }}
+          className={`w-16 h-16 rounded-full flex items-center justify-center text-white font-bold text-xl ${ball.color} shadow-lg`}
+          animate={{ y: [0, -30, 0], x: [0, 100, -100, 0], rotate: [0, 360] }}
+          transition={{ duration: 3, repeat: Infinity, delay: index * 0.3 }}
           style={{ top: `${Math.random() * 50}px`, left: `${index * 70}px` }}
         >
           {ball.letter}
