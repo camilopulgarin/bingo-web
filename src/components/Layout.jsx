@@ -7,7 +7,7 @@ const Layout = ({ children }) => {
   const [open, setOpen] = useState(false);
 
   return (
-    <div className="flex h-screen bg-gray-100">
+    <div className="flex h-full bg-gray-100">
       {/* Botón hamburguesa SOLO en móviles */}
       <div className="absolute top-4 left-4 md:hidden">
         <IconButton onClick={() => setOpen(true)} className="text-gray-900">
