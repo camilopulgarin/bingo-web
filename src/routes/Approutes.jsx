@@ -6,6 +6,7 @@ import Dashboard from '../pages/dashboard';
 import Home from '../pages/home/home';
 import GameHistory from '../pages/rooms/games-history';
 import NewRoom from '../pages/rooms/newRoom/index';
+import UserSettings from '../pages/settings/UserSettings';
 
 const AppRoutes = () => {
   return (
@@ -22,7 +23,7 @@ const AppRoutes = () => {
         {/* Rutas protegidas con ProtectedRoute */}
         <Route path="/dashboard" element={<ProtectedRoute element={<Dashboard />} />} />
         <Route path="/profile" element={<ProtectedRoute element={<h1>Perfil</h1>} />} />
-        <Route path="/settings" element={<ProtectedRoute element={<h1>Configuraciones</h1>} />} />
+        <Route path="/settings" element={<ProtectedRoute element={<UserSettings />} />} />
         <Route path="/game-history" element={<ProtectedRoute element={<GameHistory />} />} />
         <Route path="/newRoom" element={<ProtectedRoute element={<NewRoom />} />} />
         <Route path="/" element={<Home />}/>
