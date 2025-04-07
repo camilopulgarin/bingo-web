@@ -1,29 +1,3 @@
-// import DynamicTable from "../../../components/DynamicTable";
-
-
-// const GameHistory = () => {
-//   const columns = [
-//     { field: "name", headerName: "Nombre de la Partida" },
-//     { field: "status", headerName: "Estado" },
-//     { field: "capacity", headerName: "Número de Participantes" },
-//     { field: "created_at", headerName: "Fecha de Creacion"}
-//   ]; 
-
-//   const data = [
-//     { name: "Partida 1", status: "Finalizado", capacity: 2, created_at: "03/03/2025" },
-//     { name: "Partida 2", status: "En curso", capacity: 5, created_at: "03/03/2025"},
-//     { name: "Partida 3", status: "Finalizado", capacity: 2, created_at: "03/03/2025" },
-//   ];
-
-//   return (
-//     <div className="p-4 max-w-4xl mx-auto">
-//       <h1 className="text-2xl font-bold mb-4">Historial de Partidas</h1>
-//       <DynamicTable columns={columns} data={data} actions={[]} />
-//     </div>
-//   );
-// };
-
-// export default GameHistory;
 import { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { fetchGameHistory, setCurrentPage } from "../../../redux/slices/gameHistorySlice";
@@ -39,32 +13,47 @@ const formatDate = (dateString) => {
 
 const GameHistory = () => {
   const dispatch = useDispatch();
-  const { games, loading, error, currentPage, gamesPerPage } = useSelector((state) => state.gameHistory);
-  console.log('gameHistory',games);
+  const {
+    games = [], // 👈 valor por defecto para evitar undefined
+    loading,
+    error,
+    currentPage,
+    gamesPerPage
+  } = useSelector((state) => state.gameHistory);
+
   useEffect(() => {
     dispatch(fetchGameHistory());
   }, [dispatch]);
 
   const startIndex = currentPage * gamesPerPage;
+  const selectedGames = games.slice(startIndex, startIndex + gamesPerPage);
 
-  const formattedGames = games.map(game => ({
+  const formattedGames = selectedGames.map(game => ({
     ...game,
     created_at: formatDate(game.created_at)
   }));
-  // const selectedGames = games.slice(startIndex, startIndex + gamesPerPage);
-  
+
   if (loading) return <p>Cargando historial...</p>;
   if (error) return <p>{error}</p>;
 
   return (
-    <div className="p-4 max-w-4xl mx-auto">
+    <div className="p-4 max-w-4xl mx-auto text-gray-600 ">
       <h1 className="text-2xl font-bold mb-4">Historial de Partidas</h1>
-      <DynamicTable columns={[
-        { field: "name", headerName: "Nombre de la Partida" },
-        { field: "status", headerName: "Estado" },
-        { field: "capacity", headerName: "Número de Participantes"},
-        { field: "created_at", headerName: "Fecha de Creación",  renderCell: (row) => formatDate(row.created_at)  }
-      ]} data={games} actions={[]} />
+
+      <DynamicTable
+        columns={[
+          { field: "name", headerName: "Nombre de la Partida" },
+          { field: "status", headerName: "Estado" },
+          { field: "capacity", headerName: "Número de Participantes" },
+          {
+            field: "created_at",
+            headerName: "Fecha de Creación",
+            renderCell: (row) => formatDate(row.created_at)
+          }
+        ]}
+        data={formattedGames} // ✅ usar los datos formateados
+        actions={[]}
+      />
 
       {/* Botones de paginación */}
       <div className="flex justify-between mt-4">
@@ -78,7 +67,9 @@ const GameHistory = () => {
         <button
           onClick={() =>
             dispatch(setCurrentPage(
-              currentPage < Math.ceil(games.length / gamesPerPage) - 1 ? currentPage + 1 : currentPage
+              currentPage < Math.ceil(games.length / gamesPerPage) - 1
+                ? currentPage + 1
+                : currentPage
             ))
           }
           disabled={startIndex + gamesPerPage >= games.length}
