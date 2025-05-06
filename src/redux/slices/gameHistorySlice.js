@@ -113,11 +113,11 @@ import { getGamesHistory } from "../../api/gamesApi"; // Ajusta la ruta según t
 // Acción asincrónica para obtener el historial de partidas
 export const fetchGameHistory = createAsyncThunk(
   "gameHistory/fetchGameHistory",
-  async (_, { rejectWithValue }) => {
+  async ({ page, limit }, { rejectWithValue }) => {
     try {
-      const data = await getGamesHistory();
+      const data = await getGamesHistory(page, limit);
       console.log('data', data); // 👀 Deberías ver { total, page, totalPages, data: [...] }
-      return data.data; // ✅ Retorna el arreglo de partidas directamente
+      return data; // ✅ Retorna el arreglo de partidas directamente
     } catch (error) {
       console.error("Error al obtener historial:", error);
       return rejectWithValue(
@@ -131,7 +131,10 @@ export const fetchGameHistory = createAsyncThunk(
 const gameHistorySlice = createSlice({
   name: "gameHistory",
   initialState: {
-    games: [],
+    data: [],
+    page: 0,
+    total: 0,
+    totalPages: 0,
     loading: false,
     error: null,
     currentPage: 0,
@@ -150,7 +153,10 @@ const gameHistorySlice = createSlice({
       })
       .addCase(fetchGameHistory.fulfilled, (state, action) => {
         state.loading = false;
-        state.games = action.payload; // ✅ Aquí llegan los datos correctos
+        state.data = action.payload.data; // ✅ Aquí llegan los datos correctos
+        state.page = action.payload.page;
+        state.total = action.payload.total;
+        state.totalPages = action.payload.totalPages;
       })
       .addCase(fetchGameHistory.rejected, (state, action) => {
         state.loading = false;

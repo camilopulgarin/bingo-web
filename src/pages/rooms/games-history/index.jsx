@@ -2,6 +2,7 @@ import { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { fetchGameHistory, setCurrentPage } from "../../../redux/slices/gameHistorySlice";
 import DynamicTable from "../../../components/DynamicTable";
+import usePagination from "../../../hooks/usePagination";
 
 const formatDate = (dateString) => {
   const date = new Date(dateString);
@@ -14,24 +15,30 @@ const formatDate = (dateString) => {
 const GameHistory = () => {
   const dispatch = useDispatch();
   const {
-    games = [], // 👈 valor por defecto para evitar undefined
+    //data = [], // 👈 valor por defecto para evitar undefined
     loading,
     error,
     currentPage,
     gamesPerPage
   } = useSelector((state) => state.gameHistory);
 
+  const {
+    data,
+    total,
+    page,
+    limit,
+    setPage,
+    setLimit,
+  } = usePagination({
+    thunk: fetchGameHistory,
+    selector: (state) => state.gameHistory,
+    defaultLimit: 10,
+    extraParams: {}, // puedes pasar filtros, búsqueda, etc.
+  });
+
   useEffect(() => {
     dispatch(fetchGameHistory());
   }, [dispatch]);
-
-  const startIndex = currentPage * gamesPerPage;
-  const selectedGames = games.slice(startIndex, startIndex + gamesPerPage);
-
-  const formattedGames = selectedGames.map(game => ({
-    ...game,
-    created_at: formatDate(game.created_at)
-  }));
 
   if (loading) return <p>Cargando historial...</p>;
   if (error) return <p>{error}</p>;
@@ -48,36 +55,18 @@ const GameHistory = () => {
           {
             field: "created_at",
             headerName: "Fecha de Creación",
-            renderCell: (row) => formatDate(row.created_at)
+            renderCell: (row) => formatDate(row?.created_at)
           }
         ]}
-        data={formattedGames} // ✅ usar los datos formateados
+        data={data} // ✅ usar los datos formateados
         actions={[]}
+        page={page}
+        pageSize={limit}
+        totalItems={total}
+        loading={loading}
+        onPageChange={setPage}
+        onLimitChange={setLimit}
       />
-
-      {/* Botones de paginación */}
-      <div className="flex justify-between mt-4">
-        <button
-          onClick={() => dispatch(setCurrentPage(Math.max(currentPage - 1, 0)))}
-          disabled={currentPage === 0}
-          className="px-4 py-2 bg-gray-200 rounded disabled:opacity-50"
-        >
-          Anterior
-        </button>
-        <button
-          onClick={() =>
-            dispatch(setCurrentPage(
-              currentPage < Math.ceil(games.length / gamesPerPage) - 1
-                ? currentPage + 1
-                : currentPage
-            ))
-          }
-          disabled={startIndex + gamesPerPage >= games.length}
-          className="px-4 py-2 bg-gray-200 rounded disabled:opacity-50"
-        >
-          Siguiente
-        </button>
-      </div>
     </div>
   );
 };
