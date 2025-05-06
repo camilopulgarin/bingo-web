@@ -18,12 +18,13 @@ const Sidebar = ({ open, setOpen }) => {
     const isDesktop = useMediaQuery('(min-width:960px)'); // Detecta si es escritorio
   
     return (
-      <Drawer
+      <Drawer 
         variant={isDesktop ? "permanent" : "temporary"}
         open={isDesktop || open} // Abierto en escritorio, controlado en móviles
         onClose={() => setOpen(false)}
         sx={{ width: 250, flexShrink: 0 }}
         PaperProps={{ sx: { width: 250, bgcolor: 'gray.900', color: 'white' } }}
+        
       >
         <List>
           {menuItems.filter(item => item.roles.includes(role)).map(({ label, icon, path }) => (

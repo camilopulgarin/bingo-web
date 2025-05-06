@@ -20,7 +20,7 @@ const Header = () => {
    
 
 <Box sx={{ flexGrow: 1 }}>
-<AppBar position="static">
+<AppBar position="static" sx={{ bgcolor:"#358c" }}>
       <Toolbar>
         <IconButton edge="start" color="inherit" aria-label="menu" sx={{ mr: 2 }}>
           <MenuIcon />

@@ -19,3 +19,11 @@ export const register = async (userData) => {
   });
   return response.data;
 };
+
+export const changePassword = async ({ oldPassword, newPassword }) => {
+  const response = await axiosInstance.post("/auth/change-password", {
+    currentPassword: oldPassword,
+    newPassword,
+  });
+  return response.data;
+};

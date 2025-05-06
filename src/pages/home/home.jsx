@@ -22,7 +22,7 @@ const Home = () => {
         flexDirection: 'column',
         minHeight: '100vh',
         color: '#000', // Change the text color to make it stand out against the background
-        backgroundImage: 'linear-gradient(#7bf9, #eeef), url("/bg_bingo.jpg")', // Reference the image from the public folder
+        backgroundImage: 'linear-gradient(#eb49, #eeef), url("/bg_bingo.jpg")', // Reference the image from the public folder
         backgroundSize: 'cover', // Ensures the background image covers the entire page
         backgroundPosition: 'center', // Centers the image
         backgroundAttachment: 'fixed', // Keeps the background fixed when scrolling
@@ -48,7 +48,7 @@ const Home = () => {
           </Typography>
           <Grid container spacing={2} justifyContent="center" sx={{ mt: 3 }}>
             <Grid item>
-              <Button variant="contained" color="primary" size="large">
+              <Button variant="contained" color="primary" size="large" sx={{ bgcolor:"#358c" }}>
                 Jugar Ahora
               </Button>
             </Grid>

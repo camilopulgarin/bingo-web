@@ -79,10 +79,10 @@ const LoginForm = ({ onSubmit }) => {
         fullWidth
         variant="contained"
         color="primary"
-        sx={{ mt: 3, mb: 2 }}
+        sx={{ mt: 3, mb: 2, bgcolor:"#358"}}
       >
         Iniciar Sesión
-      </Button>
+      </Button >
       
       <Typography variant="body2" align="center">
         ¿Olvidaste tu contraseña? <a href="#!">Recupérala aquí</a>
