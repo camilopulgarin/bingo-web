@@ -16,6 +16,8 @@
   
 }
 
+
+
 a {
   font-weight: 500;
   color: #646cff;
@@ -31,7 +33,7 @@ body {
   place-content: center;
   min-width: 320px;
   min-height: 100vh;
-  background: Linear-gradient(#7bf , #eee);
+  background-image: url('../public/textura-crema.png.png');
 }
 
 h1 {

@@ -8,20 +8,20 @@ const Layout = ({ children }) => {
 
   return (
     <div className="flex h-full bg-transparent ">
-      {/* Botón hamburguesa SOLO en móviles */}
-      <div className="absolute top-4 left-4 md:hidden">
+      <div  className="absolute top-4 left-4  sm:block">
         <IconButton onClick={() => setOpen(true)} className="text-gray-900">
           <Menu />
         </IconButton>
       </div>
-
-      {/* Sidebar recibe `open` y `setOpen` */}
-      <Sidebar open={open} setOpen={setOpen} />
-
-      {/* Contenido principal */}
+      <Sidebar  open={open} setOpen={setOpen} />
       <div className="flex-1 p-4">{children}</div>
     </div>
   );
 };
 
 export default Layout;
+
+
+
+
+

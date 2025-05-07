@@ -27,8 +27,8 @@ const Login = () => {
   };
   // comentario de test
   return (
-    <Container maxWidth="sm" sx={{ display: 'flex', alignItems: 'center', minHeight: '100vh', justifyContent: "center" }}>
-      <Paper elevation={3} sx={{ width: '100%', p: 4, boxShadow: '0px 0px 20px 2px #000',  background: '#fff0'  , color: '#111' }}>
+    <Container  maxWidth={false} className="w-full max-w-xl flex items-center justify-center min-h-screen mx-auto bg-transparent">
+      <Paper  className="!bg-[url('/textura-amarillo.png')] w-full p-4 !shadow-cartoon text-[#111]" >
         <Box>
           <LoginHeader />
           <LoginForm onSubmit={handleLogin} />
