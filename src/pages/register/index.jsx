@@ -32,7 +32,7 @@ const Register = () => {
 
   return (
     <Container maxWidth="sm" sx={{ display: 'flex', alignItems: 'center', minHeight: '100vh' }}>
-      <Paper elevation={3} sx={{ width: '100%', p: 2, boxShadow: '0px 0px 20px 2px #000', background: 'transparent', color: '#111' }}>
+      <Paper elevation={3} sx={{ width: '100%', p: 2, backgroundImage: 'url(../src/assets/textura-amarillo.png)', color: '#111' }}>
         <Box>
           <RegisterHeader name="Registro de usuarios" />
           <RegisterForm onSubmit={handleRegister} />

@@ -21,7 +21,7 @@ export const register = async (userData) => {
 };
 
 export const changePassword = async ({ oldPassword, newPassword }) => {
-  const response = await axiosInstance.post("/auth/change-password", {
+  const response = await axiosInstance.put("/auth/change-password", {
     currentPassword: oldPassword,
     newPassword,
   });

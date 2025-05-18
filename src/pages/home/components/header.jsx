@@ -4,7 +4,7 @@ import { AppBar, Toolbar, Typography, Button, IconButton, Box } from '@mui/mater
 import MenuIcon from '@mui/icons-material/Menu';
 import { useNavigate } from 'react-router-dom';
 
-const logoSrc= "/logoBingoWeb.png";
+const logoSrc= "../src/assets/logoBingoWeb.png";
 
 const Header = () => {
   const navigate = useNavigate();

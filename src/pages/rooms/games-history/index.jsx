@@ -44,7 +44,7 @@ const GameHistory = () => {
   if (error) return <p>{error}</p>;
 
   return (
-    <div className=" mt-15 p-4 max-w-4xl mx-auto text-gray-600 ">
+    <div className="bg-[#e8b647] mt-15 p-4 max-w-4xl mx-auto text-gray-600 ">
       <h1 className="text-2xl font-bold mb-4">Historial de Partidas</h1>
 
       <DynamicTable
@@ -66,6 +66,7 @@ const GameHistory = () => {
         loading={loading}
         onPageChange={setPage}
         onLimitChange={setLimit}
+        
       />
     </div>
   );

@@ -6,8 +6,25 @@ import reactRefresh from 'eslint-plugin-react-refresh'
 
 export default [
   { ignores: ['dist'] },
+
+  // Config específica para tailwind.config.js (entorno Node)
+  {
+    files: ['tailwind.config.js'],
+    env: {
+      node: true,
+    },
+    rules: {
+      // Puedes agregar reglas específicas si quieres
+    },
+  },
+
+  // Config para archivos js/jsx normales de React
   {
     files: ['**/*.{js,jsx}'],
+    env: {
+      browser: true,
+      node: false,
+    },
     languageOptions: {
       ecmaVersion: 2020,
       globals: globals.browser,
