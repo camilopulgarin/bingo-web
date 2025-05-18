@@ -52,7 +52,7 @@ export default function NewRoom() {
   );
 
   return (
-    <div className="max-w-md mx-auto p-6 bg-white rounded-xl shadow-md space-y-4 text-gray-600 mt-15">
+    <div className="max-w-md mx-auto p-6 bg-[#e8b647] rounded-xl shadow-md space-y-4 text-gray-600 mt-15">
       <h2 className="text-xl font-bold">Crear Nueva Partida</h2>
       <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
         <div>

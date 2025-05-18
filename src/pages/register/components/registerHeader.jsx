@@ -1,7 +1,7 @@
 
 import React from 'react';
 import { Box, Typography } from '@mui/material';
-const RegisterHeader = ({ name="Registro", logoSrc= "/logoBingoWeb.png"}) => {
+const RegisterHeader = ({ name="Registro", logoSrc= "../src/assets/logoBingoWeb.png"}) => {
     return (
       <Box textAlign="center" mb={0} display="flex" 
       justifyContent="space-evenly" >

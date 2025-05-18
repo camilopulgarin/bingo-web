@@ -22,7 +22,7 @@ const Home = () => {
         flexDirection: 'column',
         minHeight: '100vh',
         color: '#000', // Change the text color to make it stand out against the background
-        backgroundImage: 'linear-gradient(#eb49, #eeef), url("/bg_bingo.jpg")', // Reference the image from the public folder
+        backgroundImage: 'linear-gradient(#eb49, #eeef), url("../src/assets/bg_bingo.jpg")', // Reference the image from the public folder
         backgroundSize: 'cover', // Ensures the background image covers the entire page
         backgroundPosition: 'center', // Centers the image
         backgroundAttachment: 'fixed', // Keeps the background fixed when scrolling
@@ -36,14 +36,14 @@ const Home = () => {
       <Container maxWidth="lg" sx={{ flexGrow: 1 }}>
         <Box sx={{ textAlign: 'center', mt: 5 }}>
           <Typography
-            variant="h2"
+            variant="h1"
             component="h1"
             gutterBottom
-            sx={{ textShadow: '0px 0px 10px  #fff' }}
+            sx={{ textShadow: '0px 0px 10px  #fff', fontWeight: '400' }}
           >
             ¡Bienvenido a Bingo Web!
           </Typography>
-          <Typography sx={{ textShadow: '0px 0px 8px #ccc' }} variant="h5" paragraph>
+          <Typography sx={{ textShadow: '0px 0px 8px #ccc'  }} variant="h5" paragraph>
             Participa en emocionantes partidas de bingo en línea y gana increíbles premios. Únete ahora para empezar a jugar.
           </Typography>
           <Grid container spacing={2} justifyContent="center" sx={{ mt: 3 }}>

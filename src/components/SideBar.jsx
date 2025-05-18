@@ -23,7 +23,7 @@ const Sidebar = ({ open, setOpen }) => {
         open={isDesktop || open} // Abierto en escritorio, controlado en móviles
         onClose={() => setOpen(false)}
         sx={{ width: 250, flexShrink: 0 }}
-        PaperProps={{ sx: { width: 250, bgcolor: 'gray.900', color: 'white' } }}
+        PaperProps={{ sx: { width: 250, backgroundColor: '#eee', color: 'white' } }}
         
       >
         <List>

@@ -2,7 +2,7 @@ import React from 'react';
 import { Box, Button, Typography } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
 
-const logoSrc= "/logoBingoWeb.png";
+const logoSrc= "../src/assets/logoBingoWeb.png";
 
 const LoginHeader = () => {
   const navigate = useNavigate();

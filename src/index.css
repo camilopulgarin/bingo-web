@@ -1,7 +1,11 @@
 @import "tailwindcss";
 
+
+
 :root {
-  font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
+  font-family: "Comic Neue", cursive;
+  font-weight: 400;
+  font-style: normal;
   line-height: 1.5;
   font-weight: 400;
 
@@ -28,12 +32,15 @@ a:hover {
 }
 
 body {
+  font-family: "Comic Neue", cursive;
+  font-weight: 400;
+  font-style: normal;
   margin: 0;
   display: flex;
   place-content: center;
   min-width: 320px;
   min-height: 100vh;
-  background-image: url('../public/textura-crema.png.png');
+  background-image: url('../src/assets/textura-crema.png.png');
 }
 
 h1 {
