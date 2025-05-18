@@ -1,27 +1,46 @@
-import React from 'react';
 import { Container, Box, Paper } from '@mui/material';
 import RegisterHeader from './components/registerHeader';
 import RegisterForm from './components/registerForm';
-
+import { registerUser } from '../../redux/slices/authSlice'; // Importamos la acción de Redux
+import { useDispatch } from 'react-redux';
+import { toast, ToastContainer } from 'react-toastify';
+import { useNavigate } from 'react-router-dom';
 
 const Register = () => {
-  const handleRegister = (data) => {
+  const dispatch = useDispatch(); // Inicializamos useDispatch
+  const navigate = useNavigate();
+
+  const handleRegister = async (data) => {
     console.log('Datos enviados:', data);
-    // Aquí puedes llamar a tu API o manejar la lógica de autenticación
+
+    try {
+      // Enviamos la acción registerUser a Redux
+      const result = await dispatch(registerUser(data));
+
+      if (registerUser.fulfilled.match(result)) {
+        toast.success('Registro exitoso. Redirigiendo al inicio de sesión...');
+        setTimeout(() => navigate('/login'), 2000);
+      } else {
+        toast.error(result.payload.message || 'Error al registrar');
+      }
+
+    } catch (error) {
+      console.error('Error al registrar el usuario:', error);
+      toast.error(error.message || 'Error en el registro');
+    }
   };
-// register
+
   return (
-    <Container  maxWidth="sm" sx={{ display: 'flex', alignItems: 'center', minHeight: '100vh' }} >
-      <Paper elevation={3} sx={{ width: '100%', p: 4 }}>
-        <Box >
-          <RegisterHeader />
+    <Container maxWidth="sm" sx={{ display: 'flex', alignItems: 'center', minHeight: '100vh' }}>
+      <Paper elevation={3} sx={{ width: '100%', p: 2, backgroundImage: 'url(../src/assets/textura-amarillo.png)', color: '#111' }}>
+        <Box>
+          <RegisterHeader name="Registro de usuarios" />
           <RegisterForm onSubmit={handleRegister} />
         </Box>
       </Paper>
+      <ToastContainer />
     </Container>
   );
 };
 
 export default Register;
-
-

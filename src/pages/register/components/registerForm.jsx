@@ -1,28 +1,35 @@
-import React from 'react';
 import { useForm, Controller } from 'react-hook-form';
-import { TextField, Button, Box, Typography } from '@mui/material';
+import { TextField, Button, Box, Typography, FormControlLabel, Checkbox } from '@mui/material';
 import * as Yup from 'yup';
 import { yupResolver } from '@hookform/resolvers/yup';
+import { regiterSchema } from '../validations';
+import { Link } from 'react-router-dom';
 
-const schema = Yup.object().shape({
-  user: Yup.string().required('El nombre de usuario es requerido'),
-  email: Yup.string().email('El correo electrónico debe ser válido').required('El correo electrónico es requerido'),
-  password: Yup.string()
-    .min(8, 'La contraseña debe tener al menos 8 caracteres')
-    .required('La contraseña es requerida'),
-  confirmPassword: Yup.string()
-    .oneOf([Yup.ref('password'), null], 'Las contraseñas no coinciden')
-    .required('La confirmación de la contraseña es requerida'),
-  terms: Yup.bool().oneOf([true], 'Debes aceptar los términos y condiciones').required('Debes aceptar los términos y condiciones'),
-});
+import { useState } from 'react';
+
+import Dialog from '@mui/material/Dialog';
+import DialogActions from '@mui/material/DialogActions';
+import DialogContent from '@mui/material/DialogContent';
+import DialogTitle from '@mui/material/DialogTitle';
+import TermsAndConditions from './termsAndConditions';
+import PrivacyPolicy from './privacyPolicy';
+
+import UseModal from '../useModal';
+
 const RegisterForm = ({ onSubmit }) => {
   const {
     handleSubmit,
     control,
     formState: { errors },
   } = useForm({
-    resolver: yupResolver(schema)
+    resolver: yupResolver(regiterSchema)
   });
+
+  console.log("errors: ", errors)
+
+  const { isOpen: openTermsModal, openModal: handleOpenTermsModal, closeModal: handleCloseTermsModal } = UseModal();
+  const { isOpen: openPrivacyModal, openModal: handleOpenPrivacyModal, closeModal: handleClosePrivacyModal } = UseModal();
+
   return (
     < Box component="form" onSubmit={handleSubmit(onSubmit)} noValidate >
       <Controller
@@ -31,7 +38,7 @@ const RegisterForm = ({ onSubmit }) => {
         defaultValue=""
         
         render={({ field }) => (
-          <TextField
+          <TextField 
             {...field}
             label="Nombre de usuario"
             variant="outlined"
@@ -94,21 +101,56 @@ const RegisterForm = ({ onSubmit }) => {
             helperText={errors.confirmPassword?.message}
           />
         )}
-      />
-      
-     <Box textAlign="center" >
-        <a>Acepto terminos y condiciones</a>
-        <input type="checkbox" />
-     </Box>
-     <Button
+      />    
+      <Button
         type="submit"
         fullWidth
         variant="contained"
         color="primary"
-        sx={{ mt: 3, mb: 2 }}
+        sx={{ mt: 2, mb: 1 }}
       >
         Registrarse
       </Button>
+
+      <Typography variant="body2" color="textPrimary" align="center" sx={{ mt: 2, fontSize: '1rem' }}>
+        ¿Ya estás registrado?&nbsp;  
+        <Link to=".//login">
+          Acceder
+        </Link>.
+      </Typography>
+      <Typography variant="body2" color="textPrimary" align="center" sx={{ mt: 1 }}>
+        Al crear una nueva cuenta, aceptas las{' '} 
+        <Link onClick={handleOpenTermsModal} style={{ cursor: 'pointer' }}>
+          Condiciones del servicio
+        </Link> y {' '}
+        <Link onClick={handleOpenPrivacyModal} style={{ cursor: 'pointer' }}>
+          Política de Privacidad
+        </Link> de Bingo-web
+      </Typography>
+
+      <Dialog open={openTermsModal} onClose={handleCloseTermsModal}>
+        <DialogTitle>Términos y Condiciones</DialogTitle>
+        <DialogContent>
+          <TermsAndConditions />
+        </DialogContent>
+        <DialogActions>
+          <Button onClick={handleCloseTermsModal} color="primary">
+            Cerrar
+          </Button>
+        </DialogActions>
+      </Dialog>
+
+      <Dialog open={openPrivacyModal} onClose={handleClosePrivacyModal}>
+        <DialogTitle>Política de Privacidad</DialogTitle>
+        <DialogContent>
+          <PrivacyPolicy />
+        </DialogContent>
+        <DialogActions>
+          <Button onClick={handleClosePrivacyModal} color="primary">
+            Cerrar
+          </Button>
+        </DialogActions>
+      </Dialog>
   </Box>
   );
 };
