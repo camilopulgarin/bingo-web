@@ -5,6 +5,7 @@ module.exports = {
       extend: {
         fontFamily: {
           vintage: ['"Rubik Dirt"', 'cursive'],
+          retro: ['Creepster', 'cursive'],
         },
         colors: {
           retro: {
