@@ -31,7 +31,7 @@ const LoginForm = ({ onSubmit }) => {
       })
       .catch(() => {
         // Handle login failure (e.g., incorrect credentials)
-        setLoginError('Credenciales incorrectas. Por favor, intente nuevamente.');
+        setLoginError('Credenciales incorrectas');
       });
   };
 
