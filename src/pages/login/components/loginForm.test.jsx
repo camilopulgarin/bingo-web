@@ -45,10 +45,10 @@ describe('LoginForm', () => {
     const mockSubmitReject = vi.fn(() => Promise.reject());
     render(<LoginForm onSubmit={mockSubmitReject} />);
 
-    userEvent.type(screen.getByLabelText(/Correo Electrónico/i), 'test@example.com');
-    userEvent.type(screen.getByLabelText(/Contraseña/i), '123456');
+    await userEvent.type(screen.getByLabelText(/Correo Electrónico/i), 'test@example.com');
+    await userEvent.type(screen.getByLabelText(/Contraseña/i), '123456');
 
-    userEvent.click(screen.getByRole('button', { name: /Iniciar Sesión/i }));
+    await userEvent.click(screen.getByRole('button', { name: /Iniciar Sesión/i }));
 
     expect(await screen.findByText(/Credenciales incorrectas/i)).toBeInTheDocument();
   });

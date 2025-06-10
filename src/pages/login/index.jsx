@@ -19,7 +19,7 @@ const Login = () => {
         toast.success('Inicio de sesión exitoso');
         navigate('/dashboard');
       } else {
-        toast.error(result.payload.message)
+        toast.error('Credenciales incorrectas')
       }
     } catch (error) {
       toast.error(typeof error.message === 'string' ? error.message : JSON.stringify(error.message));
