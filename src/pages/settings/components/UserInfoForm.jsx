@@ -9,8 +9,7 @@ import {
   Button,
 } from "@mui/material";
 
-import { toast, ToastContainer } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
+import { showSuccess, showError } from '../../../utils/toast';
 
 export default function UserInfoForm() {
   const dispatch = useDispatch();
@@ -56,7 +55,7 @@ export default function UserInfoForm() {
   useEffect(() => {
     if (updateStatus === "succeeded") {
       setEditing(false);
-      toast.success("¡Nombre actualizado con éxito!");
+      showSuccess("¡Nombre actualizado con éxito!");
     }
 
     if (updateStatus === "failed" && updateError) {
@@ -64,7 +63,7 @@ export default function UserInfoForm() {
         typeof updateError === "string"
           ? updateError
           : updateError.message || "Error al actualizar usuario.";
-      toast.error(message);
+      showError(message);
     }
   }, [updateStatus, updateError]);
 
@@ -74,7 +73,7 @@ export default function UserInfoForm() {
         typeof error === "string"
           ? error
           : error.message || "Error al cargar la información del usuario.";
-      toast.error(message);
+      showError(message);
     }
   }, [error]);
 
@@ -123,7 +122,7 @@ export default function UserInfoForm() {
       <Typography variant="body1">
         {user?.user.email || "No disponible"}
       </Typography>
-      <ToastContainer position="bottom-right" autoClose={3000} />
+      
     </Box>
   );
 }
