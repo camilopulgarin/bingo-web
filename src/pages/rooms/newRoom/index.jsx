@@ -5,6 +5,7 @@ import { createNewGame } from "../../../redux/slices/postNewRoomSlice";
 import { validationSchema } from "./validations";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
+import { showSuccess, showError } from '../../../utils/toast';
 
 export default function NewRoom() {
   const dispatch = useDispatch();
@@ -22,6 +23,7 @@ export default function NewRoom() {
     handleSubmit,
     setValue,
     watch,
+    reset,
     formState: { errors, isSubmitting },
   } = useForm({
     resolver: yupResolver(validationSchema),
@@ -31,7 +33,18 @@ export default function NewRoom() {
   const userIds = watch("userIds");
 
   const onSubmit = async (data) => {
-    dispatch(createNewGame(data));
+    try {
+      const resultAction = await dispatch(createNewGame(data));
+      if (createNewGame.fulfilled.match(resultAction)) {
+        showSuccess("🎉 Partida creada exitosamente" );
+        setSearchTerm("");
+        reset();
+      } else {
+        throw new Error(resultAction.error?.message || "Error al crear la partida");
+      }
+    } catch (err) {
+      showError(`❌ ${err.message}`);
+    }
   };
 
   const handleAddUser = (userId) => {
@@ -46,9 +59,10 @@ export default function NewRoom() {
     setValue("userIds", updated, { shouldValidate: true });
   };
 
-  const filteredUsers = users.filter((user) =>
-    user.name.toLowerCase().includes(searchTerm.toLowerCase()) &&
-    !userIds.includes(user.id)
+  const filteredUsers = users.filter(
+    (user) =>
+      user.name.toLowerCase().includes(searchTerm.toLowerCase()) &&
+      !userIds.includes(user.id)
   );
 
   return (
@@ -132,6 +146,7 @@ export default function NewRoom() {
           {creatingGame ? "Creando..." : "Crear Partida"}
         </button>
       </form>
+      
     </div>
   );
 }
