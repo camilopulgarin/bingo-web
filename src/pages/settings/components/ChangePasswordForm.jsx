@@ -3,11 +3,11 @@
   import { TextField, Button } from "@mui/material";
   import { yupResolver } from "@hookform/resolvers/yup";
   import * as Yup from "yup";
-  import { toast, ToastContainer } from "react-toastify";
   import { useDispatch, useSelector } from "react-redux";
   import { changePassword, clearAuthMessages } from "../../../redux/slices/authSlice";
   import { useEffect } from "react";
-  import "react-toastify/dist/ReactToastify.css";
+  import { showSuccess, showError } from '../../../utils/toast';
+  
   
   const schema = Yup.object().shape({
     oldPassword: Yup.string().required("Debes ingresar tu contraseña actual"),
@@ -43,11 +43,11 @@
       dispatch(changePassword({ oldPassword, newPassword: password }))
         .unwrap()
         .then(() => {
-          toast.success("Contraseña actualizada correctamente.");
+          showSuccess("Contraseña actualizada correctamente.");
           reset();
         })
         .catch((err) => {
-          toast.error(err || "Error al cambiar la contraseña");
+          showError(err || "Error al cambiar la contraseña");
         });
     };
   
@@ -121,8 +121,7 @@
           </Button>
         </form>
   
-        {/* Contenedor de los toasts */}
-        <ToastContainer position="top-right" autoClose={3000} hideProgressBar />
+        
       </>
     );
   }
