@@ -8,17 +8,13 @@ const GenerateButton = () => {
   const dispatch = useDispatch();
 
   return (
-    <div className="flex justify-center mt-4">
+    <div className="flex justify-center ">
       <Button
-        variant="contained"
-        color="secondary"
+        variant="outlined"
+        color="warning"
         startIcon={<CasinoIcon />}
         onClick={() => dispatch(generateCard())}
-        sx={{
-          fontFamily: 'Creepster, cursive',
-          fontSize: '1.2rem',
-          padding: '0.5rem 1.5rem',
-        }}
+        
       >
         ¡Nueva Tabla!
       </Button>

@@ -8,6 +8,7 @@ import GameHistory from '../pages/rooms/games-history';
 import NewRoom from '../pages/rooms/newRoom/index';
 import UserSettings from '../pages/settings/UserSettings';
 import RandomBingoTable from '../pages/game';
+import GameSetup from '../pages/rooms/GameSetup/GameSetup';
 
 const AppRoutes = () => {
   return (
@@ -28,6 +29,7 @@ const AppRoutes = () => {
         <Route path="/game-history" element={<ProtectedRoute element={<GameHistory />} />} />
         <Route path="/newRoom" element={<ProtectedRoute element={<NewRoom />} />} />
         <Route path="/game" element={<ProtectedRoute element={<RandomBingoTable />} />} />
+        <Route path="/game-setup/:id" element={<ProtectedRoute element={<GameSetup />} />} />
         <Route path="/" element={<Home />}/>
         
         {/* Redireccionar a login por defecto */}

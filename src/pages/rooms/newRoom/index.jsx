@@ -75,7 +75,7 @@ export default function NewRoom() {
           {errors.name && <p className="text-red-500 text-sm">{errors.name.message}</p>}
         </div>
 
-        <div>
+        <div >
           <label className="block font-medium">Capacidad</label>
           <input {...register("capacity")} type="number" className="w-full p-2 border rounded" />
           {errors.capacity && <p className="text-red-500 text-sm">{errors.capacity.message}</p>}
