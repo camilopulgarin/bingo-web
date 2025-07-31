@@ -6,14 +6,8 @@ import Summary from './components/Summary';
 
 
 export const StepsGameSetup = ({ state, send }) => {
-const { id } = useParams();
 
-  useEffect (
-    () => {
-      
-    send({ type: "NEXT",  });
-    }
-  )
+
   const renderContent = () => {
     if(state.matches('selectTableCount')) return <SelectTableCount send={send} />;
     if(state.matches('selectGameMode')) return <SelectGameMode send={send} state={state}  />;
