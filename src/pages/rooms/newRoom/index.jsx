@@ -6,6 +6,7 @@ import { validationSchema } from "./validations";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { showSuccess, showError } from '../../../utils/toast';
+import { Button } from "@mui/material";
 
 export default function NewRoom() {
   const dispatch = useDispatch();
@@ -138,13 +139,11 @@ export default function NewRoom() {
         </div>
 
         {gameError && <p className="text-red-500">{gameError}</p>}
-        <button
-          type="submit"
-          className="w-full bg-green-500 text-white p-2 rounded"
+        <Button  className="w-full" type="submit" variant="contained" color="warning" style={{ marginTop: "1rem" }}
           disabled={isSubmitting || creatingGame}
         >
           {creatingGame ? "Creando..." : "Crear Partida"}
-        </button>
+        </Button>
       </form>
       
     </div>
