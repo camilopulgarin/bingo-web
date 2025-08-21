@@ -38,9 +38,9 @@ const DrawNumberButton = () => {
   };
 
   return (
-    <div className="flex flex-col items-center mt-6 space-y-4">
+    <div className="flex flex-col items-center mt-1 space-y-4">
       {/* Animación del último número */}
-      <div className="relative h-32 w-32 flex items-center justify-center">
+      <div className="relative h-25 w-25 flex items-center justify-center">
         <AnimatePresence>
           {lastDrawn && (
             <motion.div
@@ -51,7 +51,7 @@ const DrawNumberButton = () => {
               transition={{ duration: 0.5, ease: 'easeInOut' }}
               className="absolute text-6xl text-yellow-800 font-retro bg-yellow-200 border-4 border-yellow-800 rounded-full h-24 w-24 flex items-center justify-center shadow-xl"
             >
-              <div className='flex flex-col items-center justify-center mb-2'>
+              <div className='flex flex-col items-center justify-center mb-1'>
                 <div className="text-5xl text-yellow-900 font-retro">{lastDrawn.letter}</div>
                 <div className="text-4xl font-bold text-yellow-900">{lastDrawn.number}</div>
               </div>
@@ -59,7 +59,7 @@ const DrawNumberButton = () => {
           )}
         </AnimatePresence>
       </div>
-      <div className='mt-6'>
+      <div className='mt-0'>
         <Button
           variant="outlined"
           color="primary"

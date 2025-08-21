@@ -17,7 +17,7 @@ const GameSetup = () => {
   // 🔹 Detecta cuando el estado llega a "redirecting"
   useEffect(() => {
     if (state.matches("redirecting")) {
-      navigate("/game", {
+      navigate(`/game/${id}`, {
         state: {
           selectedTables: state.context.selectedTables,
           gameMode: state.context.gameMode,
@@ -43,7 +43,7 @@ const GameSetup = () => {
         <StepsGameSetup state={state} send={send} />
         {state.matches("waitingRedirect") && (
           <p style={{ textAlign: "center", marginTop: "1rem" }}>
-            ¡Configuración enviada! Redirigiendo en 5 segundos...
+            ¡Configuración enviada! Redirigiendo en un par de segundos...
           </p>
         )}
       </Paper>

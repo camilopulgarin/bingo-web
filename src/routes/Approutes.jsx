@@ -28,7 +28,7 @@ const AppRoutes = () => {
         <Route path="/settings" element={<ProtectedRoute element={<UserSettings />} />} />
         <Route path="/game-history" element={<ProtectedRoute element={<GameHistory />} />} />
         <Route path="/newRoom" element={<ProtectedRoute element={<NewRoom />} />} />
-        <Route path="/game" element={<ProtectedRoute element={<GameRoom />} />} />
+        <Route path="/game/:gameId" element={<ProtectedRoute element={<GameRoom />} />} />
         <Route path="/game-setup/:id" element={<ProtectedRoute element={<GameSetup />} />} />
         <Route path="/" element={<Home />}/>
         
