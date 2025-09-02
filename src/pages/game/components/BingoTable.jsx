@@ -33,3 +33,5 @@ const BingoTable = ({ onCardReady }) => {
 
 export default BingoTable;
 
+
+
