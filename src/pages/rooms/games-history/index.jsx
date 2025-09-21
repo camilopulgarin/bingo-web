@@ -1,8 +1,9 @@
 import { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { fetchGameHistory, setCurrentPage } from "../../../redux/slices/gameHistorySlice";
+import { fetchGameHistory } from "../../../redux/slices/gameHistorySlice";
 import DynamicTable from "../../../components/DynamicTable";
 import usePagination from "../../../hooks/usePagination";
+import { Link } from "react-router-dom";
 
 const formatDate = (dateString) => {
   const date = new Date(dateString);
@@ -14,13 +15,8 @@ const formatDate = (dateString) => {
 
 const GameHistory = () => {
   const dispatch = useDispatch();
-  const {
-    //data = [], // 👈 valor por defecto para evitar undefined
-    loading,
-    error,
-    currentPage,
-    gamesPerPage
-  } = useSelector((state) => state.gameHistory);
+
+  const { loading, error } = useSelector((state) => state.gameHistory);
 
   const {
     data,
@@ -33,19 +29,20 @@ const GameHistory = () => {
     thunk: fetchGameHistory,
     selector: (state) => state.gameHistory,
     defaultLimit: 10,
-    extraParams: {}, // puedes pasar filtros, búsqueda, etc.
+    extraParams: {}, 
   });
 
+  // Cargar historial al montar componente
   useEffect(() => {
     dispatch(fetchGameHistory());
   }, [dispatch]);
 
-  if (loading) return <p>Cargando historial...</p>;
-  if (error) return <p>{error}</p>;
+  if (loading) return <p className="text-center mt-4">Cargando historial...</p>;
+  if (error) return <p className="text-center text-red-600 mt-4">{error}</p>;
 
   return (
-    <div className="bg-[#e8b647] mt-15 p-4 max-w-4xl mx-auto text-gray-600 ">
-      <h1 className="text-2xl font-bold mb-4">Historial de Partidas</h1>
+    <div className="bg-[#e8b647] mt-10 p-6 max-w-5xl mx-auto rounded-lg shadow text-gray-700">
+      <h1 className="text-2xl font-bold mb-6 text-center">Historial de Partidas</h1>
 
       <DynamicTable
         columns={[
@@ -53,20 +50,25 @@ const GameHistory = () => {
           { field: "status", headerName: "Estado" },
           { field: "capacity", headerName: "Número de Participantes" },
           {
-            field: "created_at",
-            headerName: "Fecha de Creación",
-            renderCell: (row) => formatDate(row?.created_at)
+            field: "ver_partida",
+            headerName: "Ir a la partida",
+            renderCell: (row) => (
+              <Link
+                to={`/game-setup/${row.id}`}
+                className="text-blue-600 hover:underline"
+              >
+                Configurar
+              </Link>
+            ),
           }
         ]}
-        data={data} // ✅ usar los datos formateados
-        actions={[]}
+        data={data}
+        loading={loading}
         page={page}
         pageSize={limit}
         totalItems={total}
-        loading={loading}
         onPageChange={setPage}
         onLimitChange={setLimit}
-        
       />
     </div>
   );
