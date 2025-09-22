@@ -51,7 +51,7 @@ const GameHistory = () => {
           { field: "capacity", headerName: "Número de Participantes" },
           {
             field: "ver_partida",
-            headerName: "Ir a la partida",
+            headerName: "Acción",
             renderCell: (row) => (
               <Link
                 to={`/game-setup/${row.id}`}

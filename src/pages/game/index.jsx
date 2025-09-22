@@ -65,7 +65,12 @@ const GameRoom = () => {
       <div className="grid justify-center gap-4 grid-cols-1 sm:grid-cols-2 md:grid-cols-3">
         {userTables.length > 0 ? (
           userTables.map((table, index) => (
-            <BingoTableMock key={index} card={table} />
+            <BingoTableMock 
+              key={index}
+              tableId={index}
+              card={table}
+              gameId={gameId}
+            />
           ))
         ) : (
           <p className="text-center">
