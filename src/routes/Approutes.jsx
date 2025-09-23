@@ -7,6 +7,7 @@ import Home from '../pages/home/home';
 import GameHistory from '../pages/rooms/games-history';
 import NewRoom from '../pages/rooms/newRoom/index';
 import UserSettings from '../pages/settings/UserSettings';
+import GameSocket from '../pages/game/components/BingoLive';
 import GameRoom from '../pages/game';
 import GameSetup from '../pages/rooms/GameSetup/GameSetup';
 
@@ -31,6 +32,8 @@ const AppRoutes = () => {
         <Route path="/game/:gameId" element={<ProtectedRoute element={<GameRoom />} />} />
         <Route path="/game-setup/:id" element={<ProtectedRoute element={<GameSetup />} />} />
         <Route path="/" element={<Home />}/>
+        <Route path="/live" element={<GameSocket />}/>
+        
         
         {/* Redireccionar a login por defecto */}
         <Route path="*" element={<Navigate to="/register" replace />} />
