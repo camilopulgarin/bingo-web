@@ -6,6 +6,7 @@ import { getPlayerInfo } from "../../api/gamesApi";
 import DrawNumberButton from "../../components/game/TotalBoard/DrawNumberButton";
 import DrawnNumbersTable from "../../components/game/TotalBoard/DrawnNumbersTable";
 import bingoIcon from "../../assets/bingoIcon.png";
+import GameSocket from "./components/BingoLive";
 
 const GameRoom = () => {
   const { gameId } = useParams();
@@ -56,9 +57,11 @@ const GameRoom = () => {
             <strong>Cantidad de tablas:</strong> {tableCount}
           </p>
         </div>
-
         <div className="fixed top-1 left-1">
           <DrawNumberButton />
+        </div>
+        <div className="fixed top-1 right-1">
+            <GameSocket />
         </div>
       </div>
 
