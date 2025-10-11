@@ -25,8 +25,8 @@ const GameRoom = () => {
     const fetchTables = async () => {
       try {
         const data = await getPlayerInfo(gameId);
-
-        setUserTables(data.selected_tables || []);
+        console.log("Datos del jugador:", data);
+        setUserTables(data.boards || []);
         setGameMode(data.game_mode_vote || "");
         setTableCount(data.board_count || 0);
 
@@ -70,8 +70,8 @@ const GameRoom = () => {
           userTables.map((table, index) => (
             <BingoTableMock 
               key={index}
-              tableId={index}
-              card={table}
+              tableId={table.id}
+              card={table.numbers}
               gameId={gameId}
             />
           ))

@@ -1,7 +1,9 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import BingoCell from "./BingoCell";
+import { io } from "socket.io-client";
 
 const headers = ["B", "I", "N", "G", "O"];
+const socket = io("http://localhost:3000");
 
 const BingoTableMock = ({ gameId, tableId, card, onBingo }) => {
   const [selectedCells, setSelectedCells] = useState({
@@ -11,6 +13,16 @@ const BingoTableMock = ({ gameId, tableId, card, onBingo }) => {
     G: [],
     O: [],
   });
+  const [bingoResult, setBingoResult] = useState(null);
+
+  useEffect(() => {
+    socket.on("bingoResult", (result) => {
+      setBingoResult(result);
+    });
+    return () => {
+      socket.off("bingoResult");
+    };
+  }, []);
 
   const handleToggle = (column, value, isSelected) => {
     setSelectedCells((prev) => {
@@ -25,9 +37,7 @@ const BingoTableMock = ({ gameId, tableId, card, onBingo }) => {
   };
 
   const handleBingo = () => {
-    console.log("🎯 Partida:", gameId);
-    console.log("🆔 Tabla:", tableId);
-    console.log("✅ Casillas seleccionadas:", selectedCells);
+    socket.emit("bingo", { userId: gameId, boardId: tableId });
     if (onBingo) {
       onBingo(selectedCells);
     }
@@ -69,6 +79,11 @@ const BingoTableMock = ({ gameId, tableId, card, onBingo }) => {
           ¡Bingo!
         </button>
       </div>
+      {bingoResult && (
+        <div className={`mt-2 text-center font-bold ${bingoResult.success ? "text-green-700" : "text-red-700"}`}>
+          {bingoResult.message}
+        </div>
+      )}
     </div>
   );
 };
