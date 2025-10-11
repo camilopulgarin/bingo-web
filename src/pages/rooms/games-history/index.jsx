@@ -51,16 +51,34 @@ const GameHistory = () => {
           { field: "capacity", headerName: "Número de Participantes" },
           {
             field: "ver_partida",
-            headerName: "Ir a la partida",
-            renderCell: (row) => (
-              <Link
-                to={`/game-setup/${row.id}`}
-                className="text-blue-600 hover:underline"
-              >
-                Configurar
-              </Link>
-            ),
-          }
+            headerName: "Acción",
+            renderCell: (row) => {
+              if (row.status === "pending") {
+                return (
+                  <Link
+                    to={`/game-setup/${row.id}`}
+                    className="text-blue-600 hover:underline"
+                  >
+                    Configurar
+                  </Link>
+                );
+              }
+
+              if (row.status === "configured") {
+                return (
+                  <Link
+                    to={`/game/${row.id}`}
+                    className="text-green-600 hover:underline"
+                  >
+                    Ingresar
+                  </Link>
+                );
+              }
+
+              return <span className="text-gray-500">No disponible</span>;
+            },
+}
+
         ]}
         data={data}
         loading={loading}
