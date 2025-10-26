@@ -112,7 +112,7 @@ const GameSocket = () => {
             : "Ninguna aún"}
         </div> */}
             
-        {winner && <div>🏆 Ganador confirmado: {winner}</div>}
+        {winner && <div>🏆 Ganador confirmado: {winner.pattern}</div>}
       </div>
       <DrawnBallDisplay drawn={ball} />
     </div>

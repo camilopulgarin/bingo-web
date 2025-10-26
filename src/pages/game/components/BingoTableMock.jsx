@@ -37,7 +37,7 @@ const BingoTableMock = ({ gameId, tableId, card, onBingo }) => {
   };
 
   const handleBingo = () => {
-    socket.emit("bingo", { userId: gameId, boardId: tableId });
+    socket.emit("bingo", { userId: gameId, boardId: tableId, gameId: gameId });
     if (onBingo) {
       onBingo(selectedCells);
     }
