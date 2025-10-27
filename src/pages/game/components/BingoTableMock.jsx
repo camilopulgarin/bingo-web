@@ -143,12 +143,19 @@ const BingoTableMock = ({ gameId, tableId, card, onBingo }) => {
   };
 
   const handleBingo = () => {
+<<<<<<< HEAD
     // 🔹 Guardar qué tabla envió el Bingo
     lastBingoRequest = tableId;
 
     socket.emit("bingo", { userId: gameId, boardId: tableId });
 
     if (onBingo) onBingo(selectedCells);
+=======
+    socket.emit("bingo", { userId: gameId, boardId: tableId, gameId: gameId });
+    if (onBingo) {
+      onBingo(selectedCells);
+    }
+>>>>>>> efbfbe3c378b03d7fe59abfe9267643c85229445
   };
 
   return (
