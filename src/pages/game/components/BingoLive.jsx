@@ -1,5 +1,3 @@
-
-
 import React, { useEffect, useState } from "react";
 import { io } from "socket.io-client";
 import { useNavigate } from "react-router-dom";
@@ -114,29 +112,16 @@ const GameSocket = () => {
             </button>
           </div>
         </div>
-<<<<<<< HEAD
 
-        {winner && <div>🏆 Ganador confirmado: {winner}</div>}
-=======
-        {/* <div>
-          Bola actual:{" "}
-          {ball ? `${ball.letter}${ball.number}` : "Esperando bola..."}
-        </div>
-        <div>
-          Todas las bolas:{" "}
-          {allBalls.length > 0
-            ? allBalls.map((b) => `${b.letter}${b.number}`).join(", ")
-            : "Ninguna aún"}
-        </div> */}
             
         {winner && <div>🏆 Ganador confirmado: {winner.pattern}</div>}
->>>>>>> efbfbe3c378b03d7fe59abfe9267643c85229445
+
       </div>
       <DrawnBallDisplay drawn={ball} />
 
       {/* 🔹 Modal de finalización */}
       {showModal && (
-        <div className="fixed inset-0 bg-black bg-opacity-70 flex items-center justify-center z-50">
+        <div className=" fixed inset-0 bg-[rgba(0,0,0,0.8)] bg-opacity-70 flex items-center justify-center z-50">
           <div className="bg-white rounded-2xl p-6 shadow-2xl text-center w-[90%] max-w-md animate-fadeIn">
             <h2 className="text-2xl font-bold text-gray-800 mb-4">
               {modalMessage}
