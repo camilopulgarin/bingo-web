@@ -12,6 +12,7 @@ const GameRoom = () => {
   const { gameId } = useParams();
   const navigate = useNavigate();
 
+  const [userId, setUserId] = useState(null);
   const [userTables, setUserTables] = useState([]);
   const [gameMode, setGameMode] = useState("");
   const [tableCount, setTableCount] = useState(0);
@@ -26,6 +27,7 @@ const GameRoom = () => {
       try {
         const data = await getPlayerInfo(gameId);
         console.log("Datos del jugador:", data);
+        setUserId(data.user_id);
         setUserTables(data.boards || []);
         setGameMode(data.game_mode_vote || "");
         setTableCount(data.board_count || 0);
@@ -73,6 +75,7 @@ const GameRoom = () => {
               tableId={table.id}
               card={table.numbers}
               gameId={gameId}
+              userId={userId}
             />
           ))
         ) : (
