@@ -35,3 +35,14 @@ export const patchGame = async (gameId, data) => {
     throw error;
   }
 };
+
+// Obtener detalles de una partida
+export const getGameDetail = async (gameId) => {
+  try {
+    const response = await axiosInstance.get(`/games/${gameId}/detail`);
+    return response.data; // Detalles de la partida
+  } catch (error) {
+    console.error("Error al obtener detalles de la partida:", error);
+    throw error;
+  }
+};

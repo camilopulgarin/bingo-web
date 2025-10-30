@@ -26,6 +26,7 @@ import randomBingoReducer from "./slices/bingoSlice";
 import bingoTotalCellReducer from "./slices/game/BingoTotalCellSlice";
 import joinGameReducer from "./slices/game/joinGame";
 import selectedBingoReducer from "./slices/game/selectedBingoSlice";
+import gameDetailReducer from "./slices/game/getDetailSlice";
 
 export const store = configureStore({
   reducer: {
@@ -38,6 +39,7 @@ export const store = configureStore({
     BingoTotalCell: bingoTotalCellReducer,
     joinGame: joinGameReducer,
     selectedBingo: selectedBingoReducer,
+    gameDetail: gameDetailReducer,
   },
 });
 
