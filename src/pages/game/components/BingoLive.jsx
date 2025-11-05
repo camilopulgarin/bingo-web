@@ -50,12 +50,12 @@ const GameSocket = () => {
     });
 
     socket.on("winnerConfirmed", (winnerId) => {
-      console.log("Ganador confirmado:", winnerId);
+      console.log("Ganador confirmado:", winnerId.userId);
       setWinner(winnerId);
       setGameStarted(false);
-      setModalMessage(`🏆 ¡Tenemos un ganador! Jugador: ${winnerId}`);
+      setModalMessage(`🏆 ¡Tenemos un ganador! Jugador: ${winnerId.userId}`);
       setShowModal(true);
-      narrar(`¡Tenemos un ganador! Felicidades ${winnerId}`);
+      narrar(`¡Tenemos un ganador! Felicidades ${winnerId.userId}`);
     });
 
     return () => {
@@ -114,7 +114,7 @@ const GameSocket = () => {
         </div>
 
             
-        {winner && <div>🏆 Ganador confirmado: {winner.pattern}</div>}
+        {winner && <div>🏆 Ganador confirmado: {winner.userId}</div>}
 
       </div>
       <DrawnBallDisplay drawn={ball} />
