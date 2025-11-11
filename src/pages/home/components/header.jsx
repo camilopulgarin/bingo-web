@@ -3,8 +3,9 @@ import React from 'react';
 import { AppBar, Toolbar, Typography, Button, IconButton, Box } from '@mui/material';
 import MenuIcon from '@mui/icons-material/Menu';
 import { useNavigate } from 'react-router-dom';
+import logoBingoWeb from "../../../assets/logoBingoWeb.png";
 
-const logoSrc= "../src/assets/logoBingoWeb.png";
+
 
 const Header = () => {
   const navigate = useNavigate();
@@ -26,7 +27,7 @@ const Header = () => {
           <MenuIcon />
         </IconButton>
         <Box mb={0} sx={{ flexGrow: 1 }}>
-          <img src={logoSrc} alt="Logo" style={{ width: '100px', height: 'auto', margin: '5px'}} />          
+          <img src={logoBingoWeb} alt="Logo" style={{ width: '100px', height: 'auto', margin: '5px'}} />          
         </Box>
         
         
