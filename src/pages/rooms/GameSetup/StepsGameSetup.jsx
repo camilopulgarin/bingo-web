@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import { SelectTableCount } from './components/SelectTableCount';
-import SelectGameMode from './components/selectGameMode';
+import SelectGameMode from './components/SelectGameMode';
 import SelectTables from './components/SelectTables';
 import Summary from './components/Summary';
 
