@@ -6,7 +6,7 @@ import { useDispatch } from "react-redux";
 import { addDrawnNumber, resetDrawnNumbers } from "../../../redux/slices/game/BingoTotalCellSlice";
 import { useNarrador } from "../../../hooks/useNarrador";
 
-const socket = io("http://localhost:3000");
+const socket = io(import.meta.env.VITE_API_URL_BASE);
 
 const getBingoLetter = (number) => {
   if (number <= 15) return "B";

@@ -3,7 +3,7 @@ import BingoCell from "./BingoCell";
 import { io } from "socket.io-client";
 
 const headers = ["B", "I", "N", "G", "O"];
-const socket = io("http://localhost:3000");
+const socket = io(import.meta.env.VITE_API_URL_BASE);
 
 // 🔹 Variable global para saber qué tabla presionó el botón
 let lastBingoRequest = null;
