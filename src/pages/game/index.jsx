@@ -63,7 +63,7 @@ const GameRoom = () => {
           <DrawNumberButton />
         </div>
         <div className="fixed top-1 right-1">
-            <GameSocket />
+            <GameSocket gameId={gameId}/>
         </div>
       </div>
 
