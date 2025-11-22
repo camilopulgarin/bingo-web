@@ -5,6 +5,7 @@ import DrawnBallDisplay from "./DrawnBallDisplay";
 import { useDispatch } from "react-redux";
 import { addDrawnNumber, resetDrawnNumbers } from "../../../redux/slices/game/BingoTotalCellSlice";
 import { useNarrador } from "../../../hooks/useNarrador";
+import { isGameCreator } from "../../../services/gameService";
 
 const socket = io(import.meta.env.VITE_API_URL_BASE);
 
@@ -16,7 +17,7 @@ const getBingoLetter = (number) => {
   return "O";
 };
 
-const GameSocket = () => {
+const GameSocket = ({ gameId }) => {
   const { narrar } = useNarrador();
   const navigate = useNavigate();
   const [ball, setBall] = useState(null);
@@ -26,6 +27,7 @@ const GameSocket = () => {
   const [showModal, setShowModal] = useState(false);
   const [modalMessage, setModalMessage] = useState("");
   const dispatch = useDispatch();
+  const [isCreator, setIsCreator] = useState(false);
 
   useEffect(() => {
     socket.on("connect", () => {
@@ -33,7 +35,7 @@ const GameSocket = () => {
     });
 
     socket.on("ballDrawn", (newBall) => {
-      if (!gameStarted) return;
+      // if (!gameStarted) return;
       setBall({ number: newBall, letter: getBingoLetter(newBall) });
       setAllBalls((prev) => [...prev, { number: newBall, letter: getBingoLetter(newBall) }]);
       dispatch(addDrawnNumber(newBall));
@@ -41,7 +43,7 @@ const GameSocket = () => {
     });
 
     socket.on("gameOver", (drawnBalls) => {
-      if (!gameStarted) return;
+      //if (!gameStarted) return;
       console.log("Juego terminado:", drawnBalls);
       setGameStarted(false);
       setModalMessage("🕹️ La partida ha finalizado.");
@@ -63,7 +65,23 @@ const GameSocket = () => {
       socket.off("gameOver");
       socket.off("winnerConfirmed");
     };
-  }, [gameStarted]);
+  }, []);
+
+  console.log("gameId en BingoLive:", gameId);
+
+  useEffect(() => {
+    // Verifica si el usuario es el creador solo una vez al montar
+    const checkCreator = async () => {
+      try {
+        const result = await isGameCreator(gameId);
+        console.log("Resultado de isGameCreator:", result);
+        setIsCreator(result);
+      } catch (err) {
+        setIsCreator(false);
+      }
+    };
+    if (gameId) checkCreator();
+  }, []);
 
   const startGame = () => {
     setWinner(null);
@@ -93,8 +111,10 @@ const GameSocket = () => {
     <div className="flex items-center space-x-2">
       <div className="flex flex-col items-center space-y-4">
         <h2 className="font-bold text-2xl">Bingo en Vivo 🎱</h2>
-        <div className="flex flex-col items-center space-y-2">
-          {!gameStarted && !winner && <p>Esperando inicio del juego...</p>}
+        {isCreator && (
+          <>
+          <div className="text-green-700 font-semibold">Eres el creador de la partida</div>
+          <div className="flex flex-col items-center space-y-2">
           <div>
             <button
               className="border border-blue-800 bg-blue-600 text-white px-3 py-1 rounded-lg m-1 hover:bg-blue-700 disabled:opacity-50"
@@ -112,6 +132,10 @@ const GameSocket = () => {
             </button>
           </div>
         </div>
+        </>
+        )}
+        {!gameStarted && !winner && <p>Esperando inicio del juego...</p>}
+        
 
             
         {winner && <div>🏆 Ganador confirmado: {winner.userId}</div>}
