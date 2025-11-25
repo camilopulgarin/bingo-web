@@ -5,6 +5,7 @@ import { fetchGameDetail, clearGameDetail } from "../../../redux/slices/game/get
 import DynamicTable from "../../../components/DynamicTable";
 import usePagination from "../../../hooks/usePagination";
 import { Link } from "react-router-dom";
+import './winner.css';
 
 const GameHistory = () => {
   const dispatch = useDispatch();
@@ -111,43 +112,41 @@ const GameHistory = () => {
 
       {/* Modal de detalle de partida */}
       {isModalOpen && (
-        <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50">
-          <div className="bg-white rounded-lg p-6 max-w-md w-full shadow-lg relative">
-            <button
-              onClick={handleCloseModal}
-              className="absolute top-2 right-2 text-gray-600 hover:text-gray-900"
-            >
-              ✕
-            </button>
+  <div className="modal-backdrop">
 
-            <h2 className="text-xl font-bold mb-4 text-center text-gray-800">
-              Detalles de la Partida
-            </h2>
+    {/* EFECTO FIESTA — Encima del modal */}
+    {gameDetail?.winner && <div className="fireworks"></div>}
 
-            {loadingDetail ? (
-              <p className="text-center">Cargando detalles...</p>
-            ) : gameDetail ? (
-              <div className="text-gray-700 space-y-3">
-                <p><strong>ID:</strong> {gameDetail.id}</p>
-                <p><strong>Nombre:</strong> {gameDetail.name}</p>
-                <p><strong>Estado:</strong> {gameDetail.status}</p>
+    <div className="modal-content">
+      <button onClick={handleCloseModal} className="close-btn">✕</button>
 
-                {gameDetail.winner ? (
-                  <div className="mt-4 border-t pt-3">
-                    <h3 className="font-semibold text-gray-800 mb-2">🏆 Ganador</h3>
-                    <p><strong>Nombre:</strong> {gameDetail.winner.name}</p>
-                    <p><strong>Email:</strong> {gameDetail.winner.email}</p>
-                  </div>
-                ) : (
-                  <p className="text-gray-600">Sin ganador registrado.</p>
-                )}
-              </div>
-            ) : (
-              <p className="text-center text-gray-600">No hay datos disponibles.</p>
-            )}
-          </div>
+      <h2>Detalles de la Partida</h2>
+
+      {loadingDetail ? (
+        <p>Cargando detalles...</p>
+      ) : gameDetail ? (
+        <div className="details">
+          <p><strong>ID:</strong> {gameDetail.id}</p>
+          <p><strong>Nombre:</strong> {gameDetail.name}</p>
+          <p><strong>Estado:</strong> {gameDetail.status}</p>
+
+          {gameDetail.winner ? (
+            <div className="winner">
+              <h3>🏆 Ganador</h3>
+              <p><strong>Nombre:</strong> {gameDetail.winner.name}</p>
+              <p><strong>Email:</strong> {gameDetail.winner.email}</p>
+            </div>
+          ) : (
+            <p>Sin ganador registrado.</p>
+          )}
         </div>
+      ) : (
+        <p>No hay datos disponibles.</p>
       )}
+    </div>
+  </div>
+)}
+
     </div>
   );
 };

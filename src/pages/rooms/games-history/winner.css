@@ -1,0 +1,96 @@
+.modal-backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.85);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 50;
+  overflow: hidden;
+}
+
+/* Modal */
+.modal-content {
+  background: white;
+  padding: 24px;
+  border-radius: 12px;
+  width: 100%;
+  max-width: 480px;
+  position: relative;
+  z-index: 100; /* modal delante del fondo */
+}
+
+.close-btn {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  font-size: 20px;
+  border: none;
+  background: transparent;
+  cursor: pointer;
+}
+
+/* 🔥 Fuegos artificiales FIESTA */
+.fireworks {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 200; /* ENCIMA DEL MODAL */
+}
+
+/* tres explosiones grandes */
+.fireworks::before,
+.fireworks::after,
+.fireworks .burst {
+  content: "";
+  position: absolute;
+  width: 8px;
+  height: 8px;
+  background: transparent;
+  border-radius: 50%;
+  box-shadow:
+    0 0 white,
+    80px -120px red,
+    -110px -80px yellow,
+    120px 40px cyan,
+    -150px 60px orange,
+    60px 90px purple,
+    -90px 110px lime;
+  animation: explodeBig 2s ease-out infinite;
+  opacity: 0.9;
+}
+
+/* posiciones diferentes */
+.fireworks::before {
+  top: 30%;
+  left: 40%;
+  animation-delay: 0s;
+}
+
+.fireworks::after {
+  top: 60%;
+  left: 70%;
+  animation-delay: .6s;
+}
+
+.fireworks .burst {
+  top: 50%;
+  left: 20%;
+  animation-delay: 1.2s;
+}
+
+/* explosión grande */
+@keyframes explodeBig {
+  0% {
+    transform: scale(0.2);
+    opacity: 1;
+  }
+  60% {
+    transform: scale(2.8); /* GRANDE */
+    opacity: 1;
+  }
+  100% {
+    transform: scale(3.6);
+    opacity: 0;
+  }
+}
